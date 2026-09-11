@@ -1,26 +1,43 @@
-# 💡 Interactive To-Do List App
+# ✅ To Do — PWA
 
-This project is a simple, browser-based To-Do List application built as a portfolio piece to practice fundamental Front-End development skills.
+A simple, modern, offline-first To-Do List. Vanilla HTML/CSS/JS, zero build step, zero dependencies.
 
-## 🚀 Features
+## Features
 
-* **Add Tasks:** Quickly add new tasks to the list.
-* **Toggle Complete:** Click on a task to mark it as complete (strike-through).
-* **Delete Tasks:** Remove tasks using the delete button (X).
-* **Data Persistence:** Tasks are saved locally in the browser's Local Storage, so they remain even after the browser is closed.
+* **Add / toggle / delete tasks** with filters (All / Active / Done)
+* **Local persistence** — tasks survive reload and offline use
+* **Installable PWA** — app icon, standalone window, offline caching via service worker
+* **Dark mode** — follows system preference
+* **Accessible** — keyboard friendly, ARIA labels, semantic markup
 
-## 🛠️ Technologies Used
+## Run
 
-* HTML5 (Structure)
-* CSS3 (Styling and Responsiveness)
-* Vanilla JavaScript (DOM Manipulation and Local Storage)
+Serve the folder (PWA needs HTTP/HTTPS, not `file://`). Any static server works:
 
-## 📌 Setup and Installation
+```bash
+npx serve .        # or: python -m http.server 8080
+```
 
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/your-username/js-todo-list-app.git](https://github.com/your-username/js-todo-list-app.git)
-    ```
-2.  Open the `index.html` file in your web browser.
-3. Adding a test so that I can upgrade it.
----
+Open `http://localhost:8080`, then install the app from the browser's address bar (Chrome/Edge: the install icon).
+
+## Test
+
+```bash
+node test.js
+```
+
+Core logic lives in `tasks.js` (pure functions, shared between browser and tests).
+
+## Project layout
+
+```
+index.html            app shell
+style.css             styling (dark-mode aware)
+tasks.js              pure to-do logic
+script.js             DOM glue + service worker registration
+sw.js                 service worker (offline cache)
+manifest.webmanifest  PWA manifest
+Assets/icons/         generated icons
+generate-icons.js     icon generator (node, no deps)
+test.js               logic tests
+```
